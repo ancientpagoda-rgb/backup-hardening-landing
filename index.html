@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Backup + Hardening Setup (Linux) — Flat Fee</title>
+  <meta name="description" content="Encrypted backups + basic hardening + a restore drill. One-time setup, clear report, zero drama." />
+  <style>
+    :root{--bg:#0b0f17;--card:#111827;--muted:#9ca3af;--text:#e5e7eb;--accent:#60a5fa;--good:#34d399;--warn:#fbbf24;--bad:#f87171;}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:linear-gradient(180deg,#070a10, #0b0f17 30%); color:var(--text);}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:980px;margin:0 auto;padding:32px 18px 70px}
+    .hero{padding:28px 18px;border:1px solid #1f2937;border-radius:16px;background:rgba(17,24,39,.7);backdrop-filter: blur(6px)}
+    .kicker{color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+    h1{margin:10px 0 8px;font-size:34px;line-height:1.15}
+    .sub{color:var(--muted);font-size:16px;line-height:1.5;max-width:70ch}
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .btn{display:inline-block;padding:12px 14px;border-radius:12px;border:1px solid #2b3446;background:#0f172a;color:var(--text);font-weight:600}
+    .btn.primary{background:var(--accent);border-color:transparent;color:#0b0f17}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
+    .card{grid-column:span 12;padding:16px;border:1px solid #1f2937;border-radius:16px;background:rgba(17,24,39,.6)}
+    @media(min-width:860px){.card.half{grid-column:span 6}.card.third{grid-column:span 4}}
+    h2{margin:0 0 10px;font-size:18px}
+    ul{margin:10px 0 0 18px;color:var(--text)}
+    li{margin:6px 0;color:var(--text)}
+    .muted{color:var(--muted)}
+    .price{font-size:26px;font-weight:800}
+    .pill{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid #253047;background:#0b1222;color:var(--muted)}
+    .ok{color:var(--good)} .warn{color:var(--warn)}
+    code{background:#0b1222;border:1px solid #1f2937;padding:2px 6px;border-radius:8px}
+    .footer{margin-top:26px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="kicker">Encrypted backups + basic hardening • Linux</div>
+      <h1>Backup + Hardening Setup — flat fee, done right</h1>
+      <p class="sub">If your drive dies or you fat-finger a command, you should lose minutes—not years. I’ll set up encrypted automated backups, tighten obvious network exposure, and prove restores work with a real restore drill.</p>
+      <div class="ctaRow">
+        <a class="btn primary" href="#book">Book / Request setup</a>
+        <a class="btn" href="#scope">What’s included</a>
+        <a class="btn" href="#faq">FAQ</a>
+      </div>
+    </div>
+
+    <div class="grid" id="scope">
+      <div class="card half">
+        <h2>What you get</h2>
+        <ul>
+          <li><span class="ok">Encrypted</span> borg backup repo over SSH (or local/external drive by request)</li>
+          <li>Daily backups with retention policy (daily/weekly/monthly)</li>
+          <li>Failure notifications (desktop alert) + logs</li>
+          <li>Network hygiene: remove unused inbound rules, disable LLMNR, sanity-check listeners</li>
+          <li>A restore drill (extract real files into a safe temp location)</li>
+          <li>A short report: what changed, where backups live, how to restore</li>
+        </ul>
+      </div>
+      <div class="card half">
+        <h2>Pricing</h2>
+        <div class="pill">One-time</div>
+        <p class="price">$149</p>
+        <p class="muted">Typical time: 60–120 minutes. If you want full-disk encryption migration, that’s a separate project (higher risk/downtime).</p>
+        <ul>
+          <li>Remote: LAN/Tailscale preferred</li>
+          <li>Linux desktop or home server</li>
+        </ul>
+      </div>
+
+      <div class="card third">
+        <h2>Minimum requirements</h2>
+        <ul>
+          <li>Linux machine with admin access</li>
+          <li>Backup destination: another machine via SSH or external drive</li>
+          <li>Enough storage for at least 1 full snapshot</li>
+        </ul>
+      </div>
+      <div class="card third">
+        <h2>What I won’t do</h2>
+        <ul>
+          <li>Open random ports to the internet</li>
+          <li>Disable access you rely on without confirmation</li>
+          <li>“No-password root forever” unless you insist</li>
+        </ul>
+      </div>
+      <div class="card third">
+        <h2>Nice-to-haves</h2>
+        <ul>
+          <li>Existing SSH keys / Tailscale</li>
+          <li>A second place to store the borg key + passphrase</li>
+          <li>List of folders you care about most</li>
+        </ul>
+      </div>
+
+      <div class="card" id="faq">
+        <h2>FAQ</h2>
+        <p><strong>Is this the same as “sync” (Dropbox/Drive)?</strong><br><span class="muted">No. Sync propagates deletions and ransomware. Backups keep historical versions so you can roll back.</span></p>
+        <p><strong>Is it fully automated?</strong><br><span class="muted">Yes. The backup job runs on a schedule. If it fails, you’ll get a desktop notification and a clear log command.</span></p>
+        <p><strong>Can you prove restores?</strong><br><span class="muted">Yes: we do an actual restore drill, not just “it says success.”</span></p>
+        <p><strong>Can you do Windows/Mac?</strong><br><span class="muted">Possible, but this offer is scoped to Linux. Ask and I’ll quote separately.</span></p>
+      </div>
+
+      <div class="card" id="book">
+        <h2>Book / Request setup</h2>
+        <p class="muted">To request setup, send:</p>
+        <ul>
+          <li>OS + distro</li>
+          <li>How you connect (local / SSH / Tailscale)</li>
+          <li>Backup destination (USB drive / another machine via SSH)</li>
+          <li>Approx home folder size</li>
+        </ul>
+        <p class="muted">(This page is a template. Add your preferred contact method: email, Calendly link, or a form.)</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Security note: backups and hardening reduce risk; nothing is perfect. The goal is fast recovery and smaller blast radius.</p>
+    </div>
+  </div>
+</body>
+</html>
